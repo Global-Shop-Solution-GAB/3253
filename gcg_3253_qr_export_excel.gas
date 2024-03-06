@@ -1,0 +1,838 @@
+Program.Sub.ScreenSU.Start
+gui.SS_Form1..create
+gui.SS_Form1..caption("Export Quality Records to Excel")
+gui.SS_Form1..size(6160,5755)
+gui.SS_Form1..position(0,0)
+gui.SS_Form1..event(unload,unload)
+gui.SS_Form1..alwaysontop(False)
+gui.SS_Form1..fontname("Arial")
+gui.SS_Form1..fontsize(8)
+gui.SS_Form1..forecolor(0)
+gui.SS_Form1..fontstyle(,,,,)
+gui.SS_Form1..BackColor(-2147483633)
+gui.SS_Form1..controlbox(True)
+gui.SS_Form1..maxbutton(False)
+gui.SS_Form1..minbutton(False)
+gui.SS_Form1..mousepointer(0)
+gui.SS_Form1..moveable(True)
+gui.SS_Form1..sizeable(False)
+gui.SS_Form1..ShowInTaskBar(True)
+gui.SS_Form1..titlebar(True)
+gui.SS_Form1.lbl_ddlSelect.create(label,"Search by",True,1800,200,1,100,135,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.ddlSelect.create(dropdownlist)
+gui.SS_Form1.ddlSelect.visible(True)
+gui.SS_Form1.ddlSelect.size(1800,330)
+gui.SS_Form1.ddlSelect.zorder(0)
+gui.SS_Form1.ddlSelect.position(100,335)
+gui.SS_Form1.ddlSelect.enabled(True)
+gui.SS_Form1.ddlSelect.fontname("Arial")
+gui.SS_Form1.ddlSelect.fontsize(8)
+gui.SS_Form1.ddlSelect.event(click,search)
+gui.SS_Form1.lbl_dtpFrom.create(label,"From",True,1800,200,1,100,750,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.dtpFrom.create(datepicker)
+gui.SS_Form1.dtpFrom.visible(True)
+gui.SS_Form1.dtpFrom.size(1800,345)
+gui.SS_Form1.dtpFrom.zorder(0)
+gui.SS_Form1.dtpFrom.position(100,950)
+gui.SS_Form1.dtpFrom.enabled(True)
+gui.SS_Form1.dtpFrom.checkbox(False)
+gui.SS_Form1.lbl_dtpTo.create(label,"To",True,1800,200,1,1985,750,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.dtpTo.create(datepicker)
+gui.SS_Form1.dtpTo.visible(True)
+gui.SS_Form1.dtpTo.size(1800,345)
+gui.SS_Form1.dtpTo.zorder(0)
+gui.SS_Form1.dtpTo.position(1985,950)
+gui.SS_Form1.dtpTo.enabled(True)
+gui.SS_Form1.dtpTo.checkbox(False)
+gui.SS_Form1.lbl_txtControl.create(label,"From",True,1800,200,1,100,1465,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.txtControl.create(textbox,"",True,1800,330,0,100,1665,True,0,Arial,8,16777215,1)
+gui.SS_Form1.cmd_txtControl.create(button)
+gui.SS_Form1.cmd_txtControl.caption("^")
+gui.SS_Form1.cmd_txtControl.visible(True)
+gui.SS_Form1.cmd_txtControl.size(330,330)
+gui.SS_Form1.cmd_txtControl.zorder(0)
+gui.SS_Form1.cmd_txtControl.position(1985,1665)
+gui.SS_Form1.cmd_txtControl.enabled(True)
+gui.SS_Form1.cmd_txtControl.fontname("Arial")
+gui.SS_Form1.cmd_txtControl.fontsize(8)
+gui.SS_Form1.cmd_txtControl.event(click,browser_from)
+gui.SS_Form1.lbl_txtControl1.create(label,"To",True,1800,200,1,2455,1465,True,0,Arial,8,-2147483633,0)
+gui.SS_Form1.txtControl1.create(textbox,"",True,1800,330,0,2455,1665,True,0,Arial,8,16777215,1)
+gui.SS_Form1.cmd_txtControl1.create(button)
+gui.SS_Form1.cmd_txtControl1.caption("^")
+gui.SS_Form1.cmd_txtControl1.visible(True)
+gui.SS_Form1.cmd_txtControl1.size(330,330)
+gui.SS_Form1.cmd_txtControl1.zorder(0)
+gui.SS_Form1.cmd_txtControl1.position(4340,1665)
+gui.SS_Form1.cmd_txtControl1.enabled(True)
+gui.SS_Form1.cmd_txtControl1.fontname("Arial")
+gui.SS_Form1.cmd_txtControl1.fontsize(8)
+gui.SS_Form1.cmd_txtControl1.event(click,browser_to)
+gui.SS_Form1.lvwRange.create(listview)
+gui.SS_Form1.lvwRange.view(3)
+gui.SS_Form1.lvwRange.addlistviewcolumn("Key",0,0)
+gui.SS_Form1.lvwRange.addlistviewcolumn("From",2705,0)
+gui.SS_Form1.lvwRange.addlistviewcolumn("To",2705,0)
+gui.SS_Form1.lvwRange.visible(True)
+gui.SS_Form1.lvwRange.size(5810,2000)
+gui.SS_Form1.lvwRange.zorder(0)
+gui.SS_Form1.lvwRange.position(100,2165)
+gui.SS_Form1.lvwRange.enabled(True)
+gui.SS_Form1.lvwRange.fontname("Arial")
+gui.SS_Form1.lvwRange.fontsize(8)
+gui.SS_Form1.lvwRange.event(itemclick,lvwrange_itemclick)
+gui.SS_Form1.cmd_lvwRangeAdd.create(button)
+gui.SS_Form1.cmd_lvwRangeAdd.caption("Add")
+gui.SS_Form1.cmd_lvwRangeAdd.visible(True)
+gui.SS_Form1.cmd_lvwRangeAdd.size(1000,330)
+gui.SS_Form1.cmd_lvwRangeAdd.zorder(0)
+gui.SS_Form1.cmd_lvwRangeAdd.position(4810,1665)
+gui.SS_Form1.cmd_lvwRangeAdd.enabled(True)
+gui.SS_Form1.cmd_lvwRangeAdd.fontname("Arial")
+gui.SS_Form1.cmd_lvwRangeAdd.fontsize(8)
+gui.SS_Form1.cmd_lvwRangeAdd.event(click,add)
+gui.SS_Form1.cmd_lvwRangeDelete.create(button)
+gui.SS_Form1.cmd_lvwRangeDelete.caption("Delete")
+gui.SS_Form1.cmd_lvwRangeDelete.visible(True)
+gui.SS_Form1.cmd_lvwRangeDelete.size(1000,330)
+gui.SS_Form1.cmd_lvwRangeDelete.zorder(0)
+gui.SS_Form1.cmd_lvwRangeDelete.position(100,4250)
+gui.SS_Form1.cmd_lvwRangeDelete.enabled(True)
+gui.SS_Form1.cmd_lvwRangeDelete.fontname("Arial")
+gui.SS_Form1.cmd_lvwRangeDelete.fontsize(8)
+gui.SS_Form1.cmd_lvwRangeDelete.event(click,Remove)
+gui.SS_Form1.cmd_lvwRangeClear.create(button)
+gui.SS_Form1.cmd_lvwRangeClear.caption("Clear")
+gui.SS_Form1.cmd_lvwRangeClear.visible(True)
+gui.SS_Form1.cmd_lvwRangeClear.size(1000,330)
+gui.SS_Form1.cmd_lvwRangeClear.zorder(0)
+gui.SS_Form1.cmd_lvwRangeClear.position(1185,4250)
+gui.SS_Form1.cmd_lvwRangeClear.enabled(True)
+gui.SS_Form1.cmd_lvwRangeClear.fontname("Arial")
+gui.SS_Form1.cmd_lvwRangeClear.fontsize(8)
+gui.SS_Form1.cmd_lvwRangeClear.event(click,Clear)
+gui.SS_Form1.cmdExport.create(button)
+gui.SS_Form1.cmdExport.caption("Export")
+gui.SS_Form1.cmdExport.visible(True)
+gui.SS_Form1.cmdExport.size(1000,360)
+gui.SS_Form1.cmdExport.zorder(0)
+gui.SS_Form1.cmdExport.position(100,4780)
+gui.SS_Form1.cmdExport.enabled(True)
+gui.SS_Form1.cmdExport.fontname("Arial")
+gui.SS_Form1.cmdExport.fontsize(8)
+gui.SS_Form1.cmdExport.event(click,LoadUDT)
+gui.SS_Form1.dtpFrom.tabstop(true)
+gui.SS_Form1.dtpFrom.tabindex(1)
+gui.SS_Form1.dtpTo.tabstop(true)
+gui.SS_Form1.dtpTo.tabindex(2)
+
+
+Program.Sub.ScreenSU.End
+
+Program.Sub.Preflight.Start
+
+
+Variable.Global.iKey.Declare(Long,0)
+Variable.Global.sKey.Declare(String)
+Variable.Global.iOrdinal.Declare(Long,0)
+Variable.UDT.uQuality.Define("ControlNum",String)
+Variable.UDT.uQuality.Define("Customer",String)
+Variable.UDT.uQuality.Define("Vendor",String)
+Variable.UDT.uQuality.Define("Name",String)
+Variable.UDT.uQuality.Define("Job",String)
+Variable.UDT.uQuality.Define("Suffix",String)
+Variable.UDT.uQuality.Define("Part",String)
+Variable.UDT.uQuality.Define("Description",String)
+Variable.UDT.uQuality.Define("Workcenter",String)
+Variable.UDT.uQuality.Define("Employee_Dept",String)
+Variable.UDT.uQuality.Define("Originator",String)
+Variable.UDT.uQuality.Define("Employee",String)
+Variable.UDT.uQuality.Define("Purchase_Order",String)
+Variable.UDT.uQuality.Define("PO_Line",String)
+Variable.UDT.uQuality.Define("Scrap_Code",String)
+Variable.UDT.uQuality.Define("Qty_Rejected",Float)
+Variable.UDT.uQuality.Define("Date_Entered",Date)
+Variable.UDT.uQuality.Define("Month",String)
+Variable.UDT.uQuality.Define("Year",String)
+Variable.UDT.uQuality.Define("User2",String)
+Variable.UDT.uQuality.Define("User1",String)
+Variable.UDT.uQuality.Define("Discrepancy",String)
+Variable.UDT.uQuality.Define("Disposition_Action",String)
+Variable.UDT.uQuality.Define("User_Disposed_By",String)
+Variable.UDT.uQuality.Define("Text",String)
+Variable.UDT.uQuality.Define("Notes",String)
+Variable.UDT.uQuality.Define("Cost",Float)
+Variable.UDT.uQuality.Define("Scrap_Code_Desc",String)
+Variable.uGlobal.uQuality.Declare("uQuality")
+Variable.UDT.uControl.Define("ControlNum",String,Control_Number)
+Variable.uGlobal.uControl.Declare("uControl")
+Program.Sub.Preflight.End
+
+Program.Sub.Main.Start
+'Coded by: ERIC
+'Project Start Date: 12/6/2011
+'Quote 2954
+'Hook - N/a
+
+Gui.SS_Form1.ddlSelect.AddItem("",0)
+Gui.SS_Form1.ddlSelect.AddItem("Date Range",1)
+Gui.SS_Form1.ddlSelect.AddItem("Control Number",2)
+F.ODBC.Connection!conx.OpenConnection(V.Ambient.PDSN,V.Ambient.PPass,V.Ambient.PUser)
+F.Intrinsic.Control.CallSub(Visibility)
+Gui.SS_Form1..Show
+
+
+
+
+
+Program.Sub.Main.End
+
+Program.Sub.Visibility.Start
+'Date Range
+Gui.SS_Form1.lbl_dtpFrom.Visible(False)
+Gui.SS_Form1.lbl_dtpTo.Visible(False)
+Gui.SS_Form1.dtpFrom.Visible(False)
+Gui.SS_Form1.dtpTo.Visible(False)
+
+'Control number
+Gui.SS_Form1.lbl_txtControl.Visible(False)
+Gui.SS_Form1.lbl_txtControl1.Visible(False)
+Gui.SS_Form1.txtControl.Visible(False)
+Gui.SS_Form1.txtControl1.Visible(False)
+Gui.SS_Form1.cmd_txtControl.Visible(False)
+Gui.SS_Form1.cmd_txtControl1.Visible(False)
+Gui.SS_Form1.lvwRange.Visible(False)
+Gui.SS_Form1.cmd_lvwRangeAdd.Visible(False)
+Gui.SS_Form1.cmd_lvwRangeClear.Visible(False)
+Gui.SS_Form1.cmd_lvwRangeDelete.Visible(False)
+
+'Export button
+Gui.SS_Form1.cmdExport.Visible(False)
+
+Program.Sub.Visibility.End
+
+Program.Sub.Search.Start
+F.Intrinsic.Control.If(V.Screen.SS_Form1!ddlSelect.Text,=,"")
+	F.Intrinsic.Control.CallSub(Visibility)
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.If(V.Screen.SS_Form1!ddlSelect.Text,=,"Date Range")
+	Gui.SS_Form1.lbl_dtpFrom.Visible(True)
+	Gui.SS_Form1.lbl_dtpTo.Visible(True)
+	Gui.SS_Form1.dtpFrom.Visible(True)
+	Gui.SS_Form1.dtpTo.Visible(True)
+	Gui.SS_Form1.cmdExport.Visible(True)
+	Gui.SS_Form1.lbl_txtControl.Visible(False)
+	Gui.SS_Form1.lbl_txtControl1.Visible(False)
+	Gui.SS_Form1.txtControl.Visible(False)
+	Gui.SS_Form1.txtControl1.Visible(False)
+	Gui.SS_Form1.cmd_txtControl.Visible(False)
+	Gui.SS_Form1.cmd_txtControl1.Visible(False)
+	Gui.SS_Form1.lvwRange.Visible(False)
+	Gui.SS_Form1.cmd_lvwRangeAdd.Visible(False)
+	Gui.SS_Form1.cmd_lvwRangeClear.Visible(False)
+	Gui.SS_Form1.cmd_lvwRangeDelete.Visible(False)
+	Gui.SS_Form1.txtControl.Text("")
+	Gui.SS_Form1.txtControl1.Text("")
+	Gui.SS_Form1.lvwRange.ClearItems
+F.Intrinsic.Control.Else
+	F.Intrinsic.Control.If(V.Screen.SS_Form1!ddlSelect.Text,=,"Control Number")
+		Gui.SS_Form1.lbl_txtControl.Visible(True)
+		Gui.SS_Form1.lbl_txtControl1.Visible(True)
+		Gui.SS_Form1.txtControl.Visible(True)
+		Gui.SS_Form1.txtControl1.Visible(True)
+		Gui.SS_Form1.cmd_txtControl.Visible(True)
+		Gui.SS_Form1.cmd_txtControl1.Visible(True)
+		Gui.SS_Form1.cmd_lvwRangeAdd.Visible(True)
+		Gui.SS_Form1.cmd_lvwRangeClear.Visible(True)
+		Gui.SS_Form1.cmd_lvwRangeDelete.Visible(True)
+		Gui.SS_Form1.lvwRange.Visible(True)
+		Gui.SS_Form1.cmdExport.Visible(True)
+		Gui.SS_Form1.lbl_dtpFrom.Visible(False)
+		Gui.SS_Form1.lbl_dtpTo.Visible(False)
+		Gui.SS_Form1.dtpFrom.Visible(False)
+		Gui.SS_Form1.dtpTo.Visible(False)
+		Gui.SS_Form1.txtControl.Enabled(False)
+		Gui.SS_Form1.txtControl1.Enabled(False)
+		Gui.SS_Form1.dtpFrom.Value(V.Ambient.Now)
+		Gui.SS_Form1.dtpTo.Value(V.Ambient.Now)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+
+
+Program.Sub.Search.End
+
+Program.Sub.Unload.Start
+F.ODBC.Connection!conx.Close
+F.Intrinsic.Control.End
+
+Program.Sub.Unload.End
+
+Program.Sub.Browser_From.Start
+V.Local.sTitle.Declare(String)
+V.Local.sWidth.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sRet.Declare(String)
+
+F.Intrinsic.String.Split("Control Number*!*Part*!*Date Entered","*!*",V.Local.sTitle)
+F.Intrinsic.String.Split("2500*!*3000*!*1500","*!*",V.Local.sWidth)
+V.Local.sSQL.Set("Select CONTROL_NUMBER, PART, DATE_ENTERED  From V_QUALITY Order By CONTROL_NUMBER")
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+F.Intrinsic.UI.Browser("Select a Control Number","conx",V.Local.sSQL,V.Local.sTitle,V.Local.sWidth,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.txtControl.Text(V.Local.sRet(0))
+	Gui.SS_Form1.txtControl1.Text(V.Local.sRet(0))
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Browser_From.End
+
+Program.Sub.Browser_To.Start
+V.Local.sTitle.Declare(String)
+V.Local.sWidth.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.sRet.Declare(String)
+
+F.Intrinsic.String.Split("Control Number*!*Part*!*Date Entered","*!*",V.Local.sTitle)
+F.Intrinsic.String.Split("2500*!*3000*!*1500","*!*",V.Local.sWidth)
+V.Local.sSQL.Set("Select CONTROL_NUMBER, PART, DATE_ENTERED From V_QUALITY Order By CONTROL_NUMBER")
+F.Intrinsic.UI.SetBrowserHotTypeAhead(True)
+F.Intrinsic.UI.Browser("Select a Control Number","conx",V.Local.sSQL,V.Local.sTitle,V.Local.sWidth,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,<>,"***CANCEL***")
+	F.Intrinsic.String.Split(V.Local.sRet,"*!*",V.Local.sRet)
+	Gui.SS_Form1.txtControl1.Text(V.Local.sRet(0))
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Browser_To.End
+
+Program.Sub.Add.Start
+F.Intrinsic.Control.If(V.Screen.SS_Form1!txtControl.Text,=,"")
+	F.Intrinsic.UI.Msgbox("The From field is empty...","Error Message")
+F.Intrinsic.Control.ElseIf(V.Screen.SS_Form1!txtControl1.Text,=,"")
+	F.Intrinsic.UI.Msgbox("The To field is empty...","Error Message")
+F.Intrinsic.Control.ElseIf(V.Screen.SS_Form1!txtControl1.Text,<,V.Screen.SS_Form1!txtControl.Text)
+	F.Intrinsic.UI.Msgbox("Invalid control number range...","Error Message")
+F.Intrinsic.Control.Else
+	F.Intrinsic.Debug.Stop
+	F.Intrinsic.Math.Add(V.Global.iKey,1,V.Global.iKey)
+	Gui.SS_Form1.lvwRange.AddListItem(V.Global.iKey,V.Global.iKey)
+	Gui.SS_Form1.lvwRange.SetListItemSubItemText(V.Global.iKey,1,V.Screen.SS_Form1!txtControl.Text)
+	Gui.SS_Form1.lvwRange.SetListItemSubItemText(V.Global.iKey,2,V.Screen.SS_Form1!txtControl1.Text)
+	Gui.SS_Form1.txtControl.Text("")
+	Gui.SS_Form1.txtControl1.Text("")
+F.Intrinsic.Control.EndIf
+
+Program.Sub.Add.End
+
+program.sub.lvwrange_itemclick.start
+
+V.Global.sKey.Set(V.Args.ItemKey)
+
+program.sub.lvwrange_itemclick.end
+
+Program.Sub.Remove.Start
+
+Gui.SS_Form1.lvwRange.RetrieveItemOrdinal(V.Global.sKey,V.Global.iOrdinal)
+Gui.SS_Form1.lvwRange.RemoveItem(V.Global.sKey)
+V.Global.sKey.Set("")
+
+Program.Sub.Remove.End
+
+Program.Sub.Clear.Start
+
+Gui.SS_Form1.txtControl.Text("")
+Gui.SS_Form1.txtControl1.Text("")
+Gui.SS_Form1.lvwRange.ClearItems
+
+Program.Sub.Clear.End
+
+Program.Sub.LoadUDT.Start
+V.Local.i.Declare(Long)
+V.Local.iOrd.Declare(Long)
+V.Local.sKey.Declare(String)
+V.Local.sControlNumber.Declare(String)
+V.Local.sSQL.Declare(String)
+V.Local.iUB.Declare(Long)
+V.Local.ia.Declare(Long)
+V.Local.iYear.Declare(Long)
+V.Local.sMonth.Declare(String)
+V.Local.sYear.Declare(String)
+V.Local.sQuery.Declare(String)
+V.Local.sNote.Declare(String)
+V.Local.dDate.Declare(Date)
+V.Local.sDateFrom.Declare(String)
+V.Local.sDateTo.Declare(String)
+V.Local.sDiscrepancy.Declare(String)
+V.Local.sDispAction.Declare(String)
+V.Local.sDispBy.Declare(String)
+V.Local.sUser1.Declare(String)
+V.Local.sUser2.Declare(String)
+'F.Intrinsic.Debug.InvokeDebugger
+'F.Intrinsic.Debug.Stop
+
+V.uGlobal.uQuality.Redim(-1,-1)
+F.Intrinsic.Control.If(V.Screen.SS_Form1!ddlSelect.Text,=,"Control Number")
+'-------------------------------------Search by Control Number ---------------------------------------------------------------
+	Gui.SS_Form1.lvwRange.RetrieveAllListItems(V.Local.sKey)
+	F.Intrinsic.String.Split(V.Local.sKey,"*!*",V.Local.sKey)
+	F.Intrinsic.Control.For(V.Local.i,V.Local.sKey.LBound,V.Local.sKey.UBound,1)
+		Gui.SS_Form1.lvwRange.ListItemKeyToOrdinal(V.Local.sKey(v.Local.i),V.Local.iOrd)
+		V.Local.sControlNumber.Set(V.Screen.SS_Form1!lvwRange.ListItemTextExtended(v.Local.iOrd))
+		F.Intrinsic.String.Split(V.Local.sControlNumber,"*!*",V.Local.sControlNumber)
+		F.Intrinsic.String.Concat("Select Control_Number From V_QUALITY Where CONTROL_NUMBER Between '",V.Local.sControlNumber(1),"' and '",V.Local.sControlNumber(2),"' Order by CONTROL_NUMBER",V.Local.sSQL)
+		F.ODBC.Connection!conx.OpenRecordsetRO("rst",V.Local.sSQL)
+		F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,False)
+			F.Intrinsic.Variable.LoadUDTFromRecordset("conx","rst","v.uGlobal.uControl",False)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.conx!rst.Close
+		F.Intrinsic.Control.For(V.Local.ia,V.uGlobal.uControl.LBound,V.uGlobal.uControl.UBound,1)
+			F.Intrinsic.String.Concat("Select * From V_QUALITY Where CONTROL_NUMBER = '",V.uGlobal.uControl(v.Local.ia)!ControlNum,"' Order by CONTROL_NUMBER",V.Local.sSQL)
+			F.ODBC.Connection!conx.OpenRecordsetRO("rst",V.Local.sSQL)
+			F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,False)
+				F.Intrinsic.Control.If(V.uGlobal.uQuality.UBound,=,-1)
+					V.uGlobal.uQuality.Redim(0,0)
+					V.uGlobal.uQuality!ControlNum.Set(V.ODBC.conx!rst.FieldValTrim!Control_Number)
+					V.uGlobal.uQuality!Customer.Set(V.ODBC.conx!rst.FieldValTrim!Customer)
+					V.uGlobal.uQuality!Vendor.Set(V.ODBC.conx!rst.FieldValTrim!Vendor)
+					V.uGlobal.uQuality!Name.Set(V.ODBC.conx!rst.FieldValTrim!Name)
+					V.uGlobal.uQuality!Job.Set(V.ODBC.conx!rst.FieldValTrim!JOB)
+					V.uGlobal.uQuality!Suffix.Set(V.ODBC.conx!rst.FieldValTrim!Suffix)
+					V.uGlobal.uQuality!Part.Set(V.ODBC.conx!rst.FieldValTrim!Part)
+					V.uGlobal.uQuality!Description.Set(V.ODBC.conx!rst.FieldValTrim!Description)
+					V.uGlobal.uQuality!Workcenter.Set(V.ODBC.conx!rst.FieldValTrim!Workcenter)
+					V.uGlobal.uQuality!Employee.Set(V.ODBC.conx!rst.FieldValTrim!Employee)
+					V.uGlobal.uQuality!Employee_Dept.Set(V.ODBC.conx!rst.FieldValTrim!Employee_Dept)
+					V.uGlobal.uQuality!Originator.Set(V.ODBC.conx!rst.FieldValTrim!Originator)
+					V.uGlobal.uQuality!Purchase_Order.Set(V.ODBC.conx!rst.FieldValTrim!Purchase_Order)
+					V.uGlobal.uQuality!PO_Line.Set(V.ODBC.conx!rst.FieldValTrim!PO_Line)
+					V.uGlobal.uQuality!Scrap_Code.Set(V.ODBC.conx!rst.FieldValTrim!Scrap_Code)
+					V.uGlobal.uQuality!Qty_Rejected.Set(V.ODBC.conx!rst.FieldValFloat!Qty_Rejected)
+					V.uGlobal.uQuality!Date_Entered.Set(V.ODBC.conx!rst.FieldValTrim!Date_Entered)
+					F.Intrinsic.String.Format(V.ODBC.conx!rst.FieldValTrim!Date_Entered,"mmmm",V.Local.sMonth)
+					V.uGlobal.uQuality!Month.Set(V.Local.sMonth)
+					F.Intrinsic.Date.Year(V.ODBC.conx!rst.FieldValTrim!Date_Entered,V.Local.iYear)
+					V.uGlobal.uQuality!Year.Set(V.Local.iYear)
+					'V.uGlobal.uQuality!User1.Set(V.ODBC.conx!rst.FieldValTrim!User1)
+					'V.uGlobal.uQuality!User2.Set(V.ODBC.conx!rst.FieldValTrim!User2)
+					F.Intrinsic.Math.Sub(V.ODBC.conx!rst.FieldValFloat!Orig_Scrap_Value,V.ODBC.conx!rst.FieldValFloat!Remaining_Value,V.uGlobal.uQuality!Cost)
+				F.Intrinsic.Control.Else
+					V.Local.iUB.Set(V.uGlobal.uQuality.UBound)
+					F.Intrinsic.Math.Add(V.Local.iUB,1,V.Local.iUB)
+					V.uGlobal.uQuality.RedimPreserve(V.uGlobal.uQuality.LBound,V.Local.iUB)
+					V.uGlobal.uQuality(v.Local.iUB)!ControlNum.Set(V.ODBC.conx!rst.FieldValTrim!Control_Number)
+					V.uGlobal.uQuality(v.Local.iUB)!Customer.Set(V.ODBC.conx!rst.FieldValTrim!Customer)
+					V.uGlobal.uQuality(v.Local.iUB)!Vendor.Set(V.ODBC.conx!rst.FieldValTrim!Vendor)
+					V.uGlobal.uQuality(v.Local.iUB)!Name.Set(V.ODBC.conx!rst.FieldValTrim!Name)
+					V.uGlobal.uQuality(v.Local.iUB)!Job.Set(V.ODBC.conx!rst.FieldValTrim!JOB)
+					V.uGlobal.uQuality(v.Local.iUB)!Suffix.Set(V.ODBC.conx!rst.FieldValTrim!Suffix)
+					V.uGlobal.uQuality(v.Local.iUB)!Part.Set(V.ODBC.conx!rst.FieldValTrim!Part)
+					V.uGlobal.uQuality(v.Local.iUB)!Description.Set(V.ODBC.conx!rst.FieldValTrim!Description)
+					V.uGlobal.uQuality(v.Local.iUB)!Workcenter.Set(V.ODBC.conx!rst.FieldValTrim!Workcenter)
+					V.uGlobal.uQuality(v.Local.iUB)!Employee.Set(V.ODBC.conx!rst.FieldValTrim!Employee)
+					V.uGlobal.uQuality(v.Local.iUB)!Employee_Dept.Set(V.ODBC.conx!rst.FieldValTrim!Employee_Dept)
+					V.uGlobal.uQuality(v.Local.iUB)!Originator.Set(V.ODBC.conx!rst.FieldValTrim!Originator)
+					V.uGlobal.uQuality(v.Local.iUB)!Purchase_Order.Set(V.ODBC.conx!rst.FieldValTrim!Purchase_Order)
+					V.uGlobal.uQuality(v.Local.iUB)!PO_Line.Set(V.ODBC.conx!rst.FieldValTrim!PO_Line)
+					V.uGlobal.uQuality(v.Local.iUB)!Scrap_Code.Set(V.ODBC.conx!rst.FieldValTrim!Scrap_Code)
+					V.uGlobal.uQuality(v.Local.iUB)!Qty_Rejected.Set(V.ODBC.conx!rst.FieldValFloat!Qty_Rejected)
+					V.uGlobal.uQuality(v.Local.iUB)!Date_Entered.Set(V.ODBC.conx!rst.FieldValTrim!Date_Entered)
+					F.Intrinsic.String.Format(V.ODBC.conx!rst.FieldValTrim!Date_Entered,"mmmm",V.Local.sMonth)
+					V.uGlobal.uQuality(v.Local.iUB)!Month.Set(V.Local.sMonth)
+					F.Intrinsic.Date.Year(V.ODBC.conx!rst.FieldValTrim!Date_Entered,V.Local.iYear)
+					V.uGlobal.uQuality(v.Local.iUB)!Year.Set(V.Local.iYear)
+					'V.uGlobal.uQuality(v.Local.iUB)!User1.Set(V.ODBC.conx!rst.FieldValTrim!User1)
+					'V.uGlobal.uQuality(v.Local.iUB)!User2.Set(V.ODBC.conx!rst.FieldValTrim!User2)
+					F.Intrinsic.Math.Sub(V.ODBC.conx!rst.FieldValFloat!Orig_Scrap_Value,V.ODBC.conx!rst.FieldValFloat!Remaining_Value,V.uGlobal.uQuality(v.Local.iUB)!Cost)
+				F.Intrinsic.Control.EndIf
+'F.Intrinsic.Debug.Stop
+				F.Intrinsic.String.Concat("Select * From V_QUALITY_DISP Where CONTROL_NUMBER = '",V.uGlobal.uControl(v.Local.ia)!ControlNum,"'",V.Local.sQuery)
+				F.ODBC.Connection!conx.OpenRecordsetRO("rstA",V.Local.sQuery)
+				F.Intrinsic.Control.If(V.ODBC.conx!rstA.EOF,=,False)
+					V.Local.iUB.Set(V.uGlobal.uQuality.UBound)
+					F.Intrinsic.Control.DoUntil(V.ODBC.conx!rstA.EOF,=,True)
+						V.Local.sDiscrepancy.Set(V.uGlobal.uQuality(v.Local.iUB)!Discrepancy.Trim)
+						F.Intrinsic.String.Concat(V.Local.sDiscrepancy.Trim," ",V.ODBC.conx!rstA.FieldValTrim!Discrepancy,V.uGlobal.uQuality(v.Local.iUB)!Discrepancy.Trim)
+						V.Local.sDispAction.Set(V.uGlobal.uQuality(v.Local.iUB)!Disposition_Action.Trim)
+						F.Intrinsic.String.Concat(V.Local.sDispAction," ",V.ODBC.conx!rstA.FieldValTrim!Disposition_Action,V.uGlobal.uQuality(v.Local.iUB)!Disposition_Action.Trim)
+						V.Local.sDispBy.Set(V.uGlobal.uQuality(v.Local.iUB)!User_Disposed_By.Trim)
+						F.Intrinsic.String.Concat(V.Local.sDispBy.Trim," ",V.ODBC.conx!rstA.FieldValTrim!User_Disposed_By,V.uGlobal.uQuality(v.Local.iUB)!User_Disposed_By.Trim)
+						V.Local.sUser1.Set(V.uGlobal.uQuality(v.Local.iUB)!User1.Trim)
+						F.Intrinsic.String.Concat(V.Local.sUser1.Trim," ",V.ODBC.conx!rstA.FieldValTrim!User1,V.uGlobal.uQuality(v.Local.iUB)!User1.Trim)
+						V.Local.sUser2.Set(V.uGlobal.uQuality(v.Local.iUB)!User2.Trim)
+						F.Intrinsic.String.Concat(V.Local.sUser2.Trim," ",V.ODBC.conx!rstA.FieldValTrim!User2,V.uGlobal.uQuality(v.Local.iUB)!User2.Trim)
+						F.ODBC.Conx!rstA.MoveNext
+					F.Intrinsic.Control.Loop
+				F.Intrinsic.Control.EndIf
+				F.ODBC.conx!rstA.Close
+				F.Intrinsic.String.Concat("Select * From V_QUALITY_NOTES Where CONTROL_NUMBER = '",V.uGlobal.uControl(v.Local.ia)!ControlNum,"' Order By Note_Seq, Qual_Note_Seq",V.Local.sSQL)
+				F.ODBC.Connection!conx.OpenRecordsetRO("rstA",V.Local.sSQL)
+				F.Intrinsic.Control.If(V.ODBC.conx!rstA.EOF,=,False)
+					F.Intrinsic.Control.DoUntil(V.ODBC.conx!rstA.EOF,=,True)
+						V.Local.iUB.Set(V.uGlobal.uQuality.UBound)
+						V.Local.sNote.Set(V.uGlobal.uQuality(v.Local.iUB)!Notes)
+						F.Intrinsic.String.Concat(V.Local.sNote.Trim," ",V.ODBC.conx!rstA.FieldValTrim!Text,V.uGlobal.uQuality(v.Local.iUB)!Notes.Trim)
+						F.ODBC.conx!rstA.MoveNext
+						F.Intrinsic.Control.Loop
+				F.Intrinsic.Control.EndIf
+				F.ODBC.conx!rstA.Close
+				F.Intrinsic.String.Concat("Select * From V_RJCT_SCRP_CODES Where SCRAP_CODE = '",V.uGlobal.uQuality(V.Local.iUB)!Scrap_Code,"'",V.Local.sSQL)
+				F.ODBC.Connection!conx.OpenRecordsetRO("rstA",V.Local.sSQL)
+				F.Intrinsic.Control.If(V.ODBC.conx!rstA.EOF,=,False)
+					V.uGlobal.uQuality(v.Local.iUB)!Scrap_Code_Desc.Set(V.ODBC.conx!rstA.FieldValTrim!Scrap_Code_Desc)
+				F.Intrinsic.Control.EndIf
+				F.ODBC.conx!rstA.Close
+			F.Intrinsic.Control.EndIf
+			F.ODBC.conx!rst.Close
+		F.Intrinsic.Control.Next(V.Local.ia)
+	F.Intrinsic.Control.Next(V.Local.i)
+
+F.Intrinsic.Control.Else
+
+'-----------------------------------------------------Search by Date Range ----------------------------------------------------------------------------------------------
+	F.Intrinsic.Control.If(V.Screen.SS_Form1!ddlSelect.Text,=,"Date Range")
+		V.Local.dDate.Set(V.Screen.SS_Form1!dtpFrom.Value)
+		F.Intrinsic.String.Format(V.Local.dDate,"YYYY-MM-DD",V.Local.sDateFrom)
+		V.Local.dDate.Set(V.Screen.SS_Form1!dtpTo.Value)
+		F.Intrinsic.String.Format(V.Local.dDate,"YYYY-MM-DD",V.Local.sDateTo)
+		F.Intrinsic.String.Concat("Select Control_Number From V_QUALITY Where DATE_ENTERED Between '",V.Local.sDateFrom,"' and '",V.Local.sDateTo,"' Order by CONTROL_NUMBER",V.Local.sSQL)
+		F.ODBC.Connection!conx.OpenRecordsetRO("rst",V.Local.sSQL)
+		F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,False)
+			F.Intrinsic.Variable.LoadUDTFromRecordset("conx","rst","v.uGlobal.uControl",False)
+		F.Intrinsic.Control.EndIf
+		F.ODBC.conx!rst.Close
+		F.Intrinsic.Control.For(V.Local.ia,V.uGlobal.uControl.LBound,V.uGlobal.uControl.UBound,1)
+			F.Intrinsic.String.Concat("Select * From V_QUALITY Where CONTROL_NUMBER = '",V.uGlobal.uControl(v.Local.ia)!ControlNum,"' Order by CONTROL_NUMBER",V.Local.sSQL)
+			F.ODBC.Connection!conx.OpenRecordsetRO("rst",V.Local.sSQL)
+			F.Intrinsic.Control.If(V.ODBC.conx!rst.EOF,=,False)
+				F.Intrinsic.Control.If(V.uGlobal.uQuality.UBound,=,-1)
+					V.uGlobal.uQuality.Redim(0,0)
+					V.uGlobal.uQuality!ControlNum.Set(V.ODBC.conx!rst.FieldValTrim!Control_Number)
+					V.uGlobal.uQuality!Customer.Set(V.ODBC.conx!rst.FieldValTrim!Customer)
+					V.uGlobal.uQuality!Vendor.Set(V.ODBC.conx!rst.FieldValTrim!Vendor)
+					V.uGlobal.uQuality!Name.Set(V.ODBC.conx!rst.FieldValTrim!Name)
+					V.uGlobal.uQuality!Job.Set(V.ODBC.conx!rst.FieldValTrim!JOB)
+					V.uGlobal.uQuality!Suffix.Set(V.ODBC.conx!rst.FieldValTrim!Suffix)
+					V.uGlobal.uQuality!Part.Set(V.ODBC.conx!rst.FieldValTrim!Part)
+					V.uGlobal.uQuality!Description.Set(V.ODBC.conx!rst.FieldValTrim!Description)
+					V.uGlobal.uQuality!Workcenter.Set(V.ODBC.conx!rst.FieldValTrim!Workcenter)
+					V.uGlobal.uQuality!Employee.Set(V.ODBC.conx!rst.FieldValTrim!Employee)
+					V.uGlobal.uQuality!Employee_Dept.Set(V.ODBC.conx!rst.FieldValTrim!Employee_Dept)
+					V.uGlobal.uQuality!Originator.Set(V.ODBC.conx!rst.FieldValTrim!Originator)
+					V.uGlobal.uQuality!Purchase_Order.Set(V.ODBC.conx!rst.FieldValTrim!Purchase_Order)
+					V.uGlobal.uQuality!PO_Line.Set(V.ODBC.conx!rst.FieldValTrim!PO_Line)
+					V.uGlobal.uQuality!Scrap_Code.Set(V.ODBC.conx!rst.FieldValTrim!Scrap_Code)
+					V.uGlobal.uQuality!Qty_Rejected.Set(V.ODBC.conx!rst.FieldValFloat!Qty_Rejected)
+					V.uGlobal.uQuality!Date_Entered.Set(V.ODBC.conx!rst.FieldValTrim!Date_Entered)
+					F.Intrinsic.String.Format(V.ODBC.conx!rst.FieldValTrim!Date_Entered,"mmmm",V.Local.sMonth)
+					V.uGlobal.uQuality!Month.Set(V.Local.sMonth)
+					F.Intrinsic.Date.Year(V.ODBC.conx!rst.FieldValTrim!Date_Entered,V.Local.iYear)
+					V.uGlobal.uQuality!Year.Set(V.Local.iYear)
+'					V.uGlobal.uQuality!User1.Set(V.ODBC.conx!rst.FieldValTrim!User1)
+'					V.uGlobal.uQuality!User2.Set(V.ODBC.conx!rst.FieldValTrim!User2)
+					F.Intrinsic.Math.Sub(V.ODBC.conx!rst.FieldValFloat!Orig_Scrap_Value,V.ODBC.conx!rst.FieldValFloat!Remaining_Value,V.uGlobal.uQuality!Cost)
+				F.Intrinsic.Control.Else
+					V.Local.iUB.Set(V.uGlobal.uQuality.UBound)
+					F.Intrinsic.Math.Add(V.Local.iUB,1,V.Local.iUB)
+					V.uGlobal.uQuality.RedimPreserve(V.uGlobal.uQuality.LBound,V.Local.iUB)
+					V.uGlobal.uQuality(v.Local.iUB)!ControlNum.Set(V.ODBC.conx!rst.FieldValTrim!Control_Number)
+					V.uGlobal.uQuality(v.Local.iUB)!Customer.Set(V.ODBC.conx!rst.FieldValTrim!Customer)
+					V.uGlobal.uQuality(v.Local.iUB)!Vendor.Set(V.ODBC.conx!rst.FieldValTrim!Vendor)
+					V.uGlobal.uQuality(v.Local.iUB)!Name.Set(V.ODBC.conx!rst.FieldValTrim!Name)
+					V.uGlobal.uQuality(v.Local.iUB)!Job.Set(V.ODBC.conx!rst.FieldValTrim!JOB)
+					V.uGlobal.uQuality(v.Local.iUB)!Suffix.Set(V.ODBC.conx!rst.FieldValTrim!Suffix)
+					V.uGlobal.uQuality(v.Local.iUB)!Part.Set(V.ODBC.conx!rst.FieldValTrim!Part)
+					V.uGlobal.uQuality(v.Local.iUB)!Description.Set(V.ODBC.conx!rst.FieldValTrim!Description)
+					V.uGlobal.uQuality(v.Local.iUB)!Workcenter.Set(V.ODBC.conx!rst.FieldValTrim!Workcenter)
+					V.uGlobal.uQuality(v.Local.iUB)!Employee.Set(V.ODBC.conx!rst.FieldValTrim!Employee)
+					V.uGlobal.uQuality(v.Local.iUB)!Employee_Dept.Set(V.ODBC.conx!rst.FieldValTrim!Employee_Dept)
+					V.uGlobal.uQuality(v.Local.iUB)!Originator.Set(V.ODBC.conx!rst.FieldValTrim!Originator)
+					V.uGlobal.uQuality(v.Local.iUB)!Purchase_Order.Set(V.ODBC.conx!rst.FieldValTrim!Purchase_Order)
+					V.uGlobal.uQuality(v.Local.iUB)!PO_Line.Set(V.ODBC.conx!rst.FieldValTrim!PO_Line)
+					V.uGlobal.uQuality(v.Local.iUB)!Scrap_Code.Set(V.ODBC.conx!rst.FieldValTrim!Scrap_Code)
+					V.uGlobal.uQuality(v.Local.iUB)!Qty_Rejected.Set(V.ODBC.conx!rst.FieldValFloat!Qty_Rejected)
+					V.uGlobal.uQuality(v.Local.iUB)!Date_Entered.Set(V.ODBC.conx!rst.FieldValTrim!Date_Entered)
+					F.Intrinsic.String.Format(V.ODBC.conx!rst.FieldValTrim!Date_Entered,"mmmm",V.Local.sMonth)
+					V.uGlobal.uQuality(v.Local.iUB)!Month.Set(V.Local.sMonth)
+					F.Intrinsic.Date.Year(V.ODBC.conx!rst.FieldValTrim!Date_Entered,V.Local.iYear)
+					V.uGlobal.uQuality(v.Local.iUB)!Year.Set(V.Local.iYear)
+'					V.uGlobal.uQuality(v.Local.iUB)!User1.Set(V.ODBC.conx!rst.FieldValTrim!User1)
+'					V.uGlobal.uQuality(v.Local.iUB)!User2.Set(V.ODBC.conx!rst.FieldValTrim!User2)
+					F.Intrinsic.Math.Sub(V.ODBC.conx!rst.FieldValFloat!Orig_Scrap_Value,V.ODBC.conx!rst.FieldValFloat!Remaining_Value,V.uGlobal.uQuality(v.Local.iUB)!Cost)
+				F.Intrinsic.Control.EndIf
+				F.Intrinsic.String.Concat("Select * From V_QUALITY_DISP Where CONTROL_NUMBER = '",V.uGlobal.uControl(v.Local.ia)!ControlNum,"'",V.Local.sQuery)
+				F.ODBC.Connection!conx.OpenRecordsetRO("rstA",V.Local.sQuery)
+				F.Intrinsic.Control.If(V.ODBC.conx!rstA.EOF,=,False)
+					V.Local.iUB.Set(V.uGlobal.uQuality.UBound)
+					F.Intrinsic.Control.DoUntil(V.ODBC.conx!rstA.EOF,=,True)
+						V.Local.sDiscrepancy.Set(V.uGlobal.uQuality(v.Local.iUB)!Discrepancy.Trim)
+						F.Intrinsic.String.Concat(V.Local.sDiscrepancy.Trim," ",V.ODBC.conx!rstA.FieldValTrim!Discrepancy,V.uGlobal.uQuality(v.Local.iUB)!Discrepancy.Trim)
+						V.Local.sDispAction.Set(V.uGlobal.uQuality(v.Local.iUB)!Disposition_Action.Trim)
+						F.Intrinsic.String.Concat(V.Local.sDispAction," ",V.ODBC.conx!rstA.FieldValTrim!Disposition_Action,V.uGlobal.uQuality(v.Local.iUB)!Disposition_Action.Trim)
+						V.Local.sDispBy.Set(V.uGlobal.uQuality(v.Local.iUB)!User_Disposed_By.Trim)
+						F.Intrinsic.String.Concat(V.Local.sDispBy.Trim," ",V.ODBC.conx!rstA.FieldValTrim!User_Disposed_By,V.uGlobal.uQuality(v.Local.iUB)!User_Disposed_By.Trim)
+						V.Local.sUser1.Set(V.uGlobal.uQuality(v.Local.iUB)!User1.Trim)
+						F.Intrinsic.String.Concat(V.Local.sUser1.Trim," ",V.ODBC.conx!rstA.FieldValTrim!User1,V.uGlobal.uQuality(v.Local.iUB)!User1.Trim)
+						V.Local.sUser2.Set(V.uGlobal.uQuality(v.Local.iUB)!User2.Trim)
+						F.Intrinsic.String.Concat(V.Local.sUser2.Trim," ",V.ODBC.conx!rstA.FieldValTrim!User2,V.uGlobal.uQuality(v.Local.iUB)!User2.Trim)
+						F.ODBC.Conx!rstA.MoveNext
+					F.Intrinsic.Control.Loop
+				F.Intrinsic.Control.EndIf
+				F.ODBC.conx!rstA.Close
+				F.Intrinsic.String.Concat("Select * From V_QUALITY_NOTES Where CONTROL_NUMBER = '",V.uGlobal.uControl(v.Local.ia)!ControlNum,"' Order By Note_Seq, Qual_Note_Seq",V.Local.sSQL)
+				F.ODBC.Connection!conx.OpenRecordsetRO("rstA",V.Local.sSQL)
+				F.Intrinsic.Control.If(V.ODBC.conx!rstA.EOF,=,False)
+					F.Intrinsic.Control.DoUntil(V.ODBC.conx!rstA.EOF,=,True)
+						V.Local.iUB.Set(V.uGlobal.uQuality.UBound)
+						V.Local.sNote.Set(V.uGlobal.uQuality(v.Local.iUB)!Notes)
+						F.Intrinsic.String.Concat(V.Local.sNote.Trim," ",V.ODBC.conx!rstA.FieldValTrim!Text,V.uGlobal.uQuality(v.Local.iUB)!Notes.Trim)
+						F.ODBC.conx!rstA.MoveNext
+						F.Intrinsic.Control.Loop
+				F.Intrinsic.Control.EndIf
+				F.ODBC.conx!rstA.Close
+				F.Intrinsic.String.Concat("Select * From V_RJCT_SCRP_CODES Where SCRAP_CODE = '",V.uGlobal.uQuality(V.Local.iUB)!Scrap_Code,"'",V.Local.sSQL)
+				F.ODBC.Connection!conx.OpenRecordsetRO("rstA",V.Local.sSQL)
+				F.Intrinsic.Control.If(V.ODBC.conx!rstA.EOF,=,False)
+					V.uGlobal.uQuality(v.Local.iUB)!Scrap_Code_Desc.Set(V.ODBC.conx!rstA.FieldValTrim!Scrap_Code_Desc)
+				F.Intrinsic.Control.EndIf
+				F.ODBC.conx!rstA.Close
+			F.Intrinsic.Control.EndIf
+			F.ODBC.conx!rst.Close
+		F.Intrinsic.Control.Next(V.Local.ia)
+	F.Intrinsic.Control.Next(V.Local.i)
+	F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.EndIf
+F.Intrinsic.Control.CallSub(Loadexcel)
+F.Intrinsic.Control.CallSub(Unload)
+
+
+
+Program.Sub.LoadUDT.End
+
+Program.Sub.LoadExcel.Start
+'F.Intrinsic.Debug.InvokeDebugger
+'F.Intrinsic.Debug.Stop
+
+V.Local.sPath.Declare(String)
+V.Local.i.Declare(Long)
+V.Local.iCol.Declare(Long)
+V.Local.iRow.Declare(Long)
+V.Local.sControlNumber.Declare(String)
+V.Local.sSuffix.Declare(String)
+V.Local.sEmployee.Declare(String)
+V.Local.sPurchase.Declare(String)
+V.Local.sPOLine.Declare(String)
+V.Local.sQtyRej.Declare(String)
+V.Local.sCost.Declare(String)
+V.Local.sRet.Declare(String)
+
+V.Local.iRow.Set(1)
+V.Local.iCol.Set(1)
+F.Intrinsic.UI.ShowSaveFileDialog("","xls|*.xls",,V.Local.sRet)
+F.Intrinsic.Control.If(V.Local.sRet,=,"***CANCEL***")
+	F.Intrinsic.Control.End
+F.Intrinsic.Control.EndIf
+
+F.Automation.MSExcel.CreateAppObject("MSExcel")
+F.Automation.MSExcel.CreateWorkbook("MSExcel","ExcelWB",V.Local.sRet)
+F.Automation.MSExcel.OpenWorksheet("ExcelWB","ExcelWS",1)
+
+F.Intrinsic.Control.If(V.uGlobal.uQuality.UBound,=,-1)
+	F.Intrinsic.Control.ExitSub
+F.Intrinsic.Control.EndIf
+
+F.Intrinsic.Control.For(V.Local.i,0,0,1)
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Control Number")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Customer")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Vendor")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Name")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Job")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Suffix")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Part")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Description")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Workcenter")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Employee")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Employee Dept")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Originator")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Purchase Order")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"PO Line")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Scrap Code")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Scrap Code Desc")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Qty Rejected")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Date Entered")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Month")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Year")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Facility of Origin")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Area Detected")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Discrepancy")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Disposal Action")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Disposed By")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Notes")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,"Cost")
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+F.Intrinsic.Control.Next(V.Local.i)
+
+V.Local.iRow.Set(2)
+V.Local.iCol.Set(1)
+F.Intrinsic.Control.For(V.Local.i,V.uGlobal.uQuality.LBound,V.uGlobal.uQuality.UBound,1)
+	F.Intrinsic.String.Concat("'",V.uGlobal.uQuality(v.Local.i)!ControlNum,V.Local.sControlNumber)
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.Local.sControlNumber)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+	
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Customer)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Vendor)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Name)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Job)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+	
+	F.Intrinsic.String.Concat("'",V.uGlobal.uQuality(v.Local.i)!Suffix,V.Local.sSuffix)
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.local.sSuffix)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Part)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Description)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Workcenter)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Intrinsic.String.Concat("'",V.uGlobal.uQuality(v.Local.i)!Employee,V.Local.sEmployee)
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.Local.sEmployee)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Employee_Dept)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Originator)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+	
+	F.Intrinsic.String.Concat("'",V.uGlobal.uQuality(v.Local.i)!Purchase_Order,V.Local.sPurchase)
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.Local.sPurchase)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Intrinsic.String.Concat("'",V.uGlobal.uQuality(v.Local.i)!PO_Line,V.Local.sPOLine)
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.Local.sPOLine)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Scrap_Code)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Scrap_Code_Desc)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Intrinsic.String.Concat("'",V.uGlobal.uQuality(v.Local.i)!Qty_Rejected,V.Local.sQtyRej)
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.Local.sQtyRej)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Date_Entered)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Month)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Year)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!User1)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!User2)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Discrepancy)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Disposition_Action)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!User_Disposed_By)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.uGlobal.uQuality(v.Local.i)!Notes)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Intrinsic.String.Concat("'",V.uGlobal.uQuality(v.Local.i)!Cost,V.Local.sCost)
+	F.Automation.MSExcel.WriteCell("ExcelWS",V.Local.iRow,V.Local.iCol,V.Local.sCost)
+	F.Intrinsic.Math.Add(V.Local.iCol,1,V.Local.iCol)
+
+	F.Intrinsic.Math.Add(V.Local.iRow,1,V.Local.iRow)
+	V.Local.iCol.Set(1)
+F.Intrinsic.Control.Next(V.Local.i)
+
+F.Automation.MSExcel.SaveWorkbook("ExcelWB")
+F.Automation.MSExcel.DestroyAllObjects("MSExcel","ExcelWB","ExcelWS")
+
+
+
+Program.Sub.LoadExcel.End
+
+Program.Sub.ScreenSS.Start
+SS_Form1{{CAPTION::Export Quality Records to Excel
+SS_Form1.CTRL{{NAME::ddlSelect\\TYPE::4\\CAPTION::Search by\\VALUE::*!*Date Range*!*Control Number\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::dtpFrom\\TYPE::6\\CAPTION::From\\TABSTOP::1\\GROUP::1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::dtpTo\\TYPE::6\\CAPTION::To\\TABSTOP::2\\GROUP::1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::txtControl\\TYPE::2\\CAPTION::From\\RANGE::lvwRange\\GROUP::2\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::txtControl1\\TYPE::2\\CAPTION::To\\RANGE::lvwRange\\GROUP::2\\BROWSER::1\\SIZE::1
+SS_Form1.CTRL{{NAME::lvwRange\\TYPE::7\\VALUE::Key*!*From*!*To\\GROUP::-1\\BROWSER::0\\SIZE::1
+SS_Form1.CTRL{{NAME::cmdExport\\TYPE::5\\CAPTION::Export\\GROUP::-1\\BROWSER::0\\SIZE::1
+
+Program.Sub.ScreenSS.End
+
